@@ -25,6 +25,8 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
 
     return int(tf && pd && nf);
 }
+
+
 #ifdef SHADER_TOY
     vec4 vertexColor = vec4(vec3(128,128,25)/255.0 ,1.0);
     ivec3 textColorRGB;
@@ -55,6 +57,7 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
     fragColor = vec4(color,alpha/1.0);
     
     
+    //文字表示設定
     int charFlag = 0;
     nCoord = (fragCoord * 2.0 - iResolution.xy)*2.0/iResolution.x+vec2(1.0,0.0);
     vec3 RGB = vertexColor.rgb;

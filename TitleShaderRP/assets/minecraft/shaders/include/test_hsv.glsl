@@ -1,3 +1,33 @@
+#ifdef SHADER_TOY
+const int dots[] = int[](
+    0xfbdf, 0xf464, 0xf496, 0xf8ef, 0x4f51, 0xfc3f, 0xfd3f, 0x248f, 0x75ae, 0xfcbf,
+    0x0, 0x9797, 0xed1e, 0xfb57, 0x99f9, 0x7c3e, 0x2255, 0x404, 0x4400
+    );
+
+ivec3 digit3 (in float d){
+    int id = int(d);
+    return ivec3(id/100,id%100/10,id%10);
+}
+int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
+    vec2 tpos = (texCoord-offset/8.0) * 8.0;
+    tpos.y *= -1.0;
+    float ts = 1.0;
+    vec2 uvs = vec2(floor(tpos.x/1.0)*1.0,0.0);
+    bool tf = all(bvec4(lessThan(uvs,tpos),lessThan(tpos,uvs+ts)));
+    
+    vec2 p = floor(vec2(fract((tpos + uvs) / ts) * 5.0));
+    bool pd = p.x<4.0 && p.y<4.0;
+
+    float j = p.y * 4.0 + p.x;
+    int dn = int(tpos.x+1.0)-1;
+    int n = 0<=dn&&dn<4 ? ns[dn] : 10;
+    float nval = mod(float(dots[n]), exp2(j + 1.0));
+    bool nf = floor(nval / exp2(j)) == 1.0;
+
+    return int(tf && pd && nf);
+}
+#endif
+
 const float PI2 = acos(-1.0)*2.0;
 const float LenSq = 0.5;
 const float inRad = (LenSq+0.05)*sqrt(2.0);
@@ -29,36 +59,6 @@ vec3 rgb2hsv(vec3 c)
 
 
 #ifdef SHADER_TOY
-const int dots[] = int[](
-    0xfbdf, 0xf464, 0xf496, 0xf8ef, 0x4f51, 0xfc3f, 0xfd3f, 0x248f, 0x75ae, 0xfcbf,
-    0x0, 0x9797, 0xed1e, 0xfb57, 0x99f9, 0x7c3e, 0x2255, 0x404, 0x4400
-    );
-
-ivec3 digit3 (in float d){
-    int id = int(d);
-    return ivec3(id/100,id%100/10,id%10);
-}
-int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
-    vec2 tpos = (texCoord-offset/8.0) * 8.0;
-    tpos.y *= -1.0;
-    float ts = 1.0;
-    vec2 uvs = vec2(floor(tpos.x/1.0)*1.0,0.0);
-    bool tf = all(bvec4(lessThan(uvs,tpos),lessThan(tpos,uvs+ts)));
-    
-    vec2 p = floor(vec2(fract((tpos + uvs) / ts) * 5.0));
-    bool pd = p.x<4.0 && p.y<4.0;
-
-    float j = p.y * 4.0 + p.x;
-    int dn = int(tpos.x+1.0)-1;
-    int n = 0<=dn&&dn<4 ? ns[dn] : 10;
-    float nval = mod(float(dots[n]), exp2(j + 1.0));
-    bool nf = floor(nval / exp2(j)) == 1.0;
-
-    return int(tf && pd && nf);
-}
-#endif
-
-#ifdef SHADER_TOY
     vec4 vertexColor = vec4(vec3(128,64,64)/255. ,1.0);
     ivec3 textColorRGB;
     int textColorDigit;
@@ -69,6 +69,7 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
     #undef FILE
 #endif
 {
+    //HSV色空間表示設定
     float scale = 1.0;
     vec2 fragCoordScaled = fragCoord * scale;
     vec3 nCoords = Normalize(fragCoordScaled);
@@ -114,9 +115,10 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
 
 
 
+    //文字表示設定
     int charFlag = 0;
     vec2 nCoord = (fragCoordScaled * 2.0 - iResolution.xy)/min(iResolution.x,iResolution.y)+vec2(1.0,-1.0);
-    vec3 RGB = hsv2rgb(HSV);
+    vec3 RGB = vertexColor.rgb;
     HSV *= vec3(360.,255.,255.);
     RGB *= vec3(255.);
 
