@@ -1,0 +1,1 @@
+$function stoc:hsv {command:'title @s title {"font":"shaderfont:overlay","text":"$(id)","color":"\',\'"}'}

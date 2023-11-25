@@ -1,0 +1,11 @@
+{
+    "providers": [
+        {
+            "type": "bitmap",
+            "file": "shaderfont:character.png",
+            "height": 0,
+            "ascent": 0,
+            "chars": ["0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+        }
+    ]
+}

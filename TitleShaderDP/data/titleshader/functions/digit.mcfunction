@@ -1,0 +1,1 @@
+$function stoc:digit {command:'title @s title {"font":"shaderfont:overlay","text":"$(id)","color":"\',\'"}'}
