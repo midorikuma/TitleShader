@@ -26,14 +26,15 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 // #define FILE file_name
 // #moj_import
 
+
 void main() {
     switch(int(flag)){
-        case -1: defaultmain();
+        default: defaultmain();
         break;
-        
         #moj_import <_cton.glsl>
+
         // Add cases here
-        case 0: fragColor = vec4(vertexColor.rgb,1.0);
+        case 0: fragColor = vec4(vertexColor.rgb,0.8);
         break;
         case 1: test_rgb();
         break;
@@ -44,6 +45,6 @@ void main() {
         // case A: file_name();
         // break;
         
-        default: discard;
+
     }
 }

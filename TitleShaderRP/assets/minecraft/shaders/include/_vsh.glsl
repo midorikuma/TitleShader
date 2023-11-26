@@ -28,7 +28,7 @@ const float Scale = 1.0;
 void main() {
     defaultmain();
 
-    flag = -1.0;
+    flag = -2.0;
     ivec2 iCoord = ivec2(texCoord0 * textureSize(Sampler0,0));
     iCoord.y -= int(1<(gl_VertexID+1) % 4);
     if(texelFetch(Sampler0, iCoord, 0)==vec4(12,34,56,78)/255.0){

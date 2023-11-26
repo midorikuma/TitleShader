@@ -111,7 +111,7 @@ vec3 rgb2hsv(vec3 c)
     col = cursorSVin ? selectedCol : col;
 
     vec2 texCoord = fragCoordScaled/iResolution.xy;
-    fragColor = texCoord.x*scale<2.0&&texCoord.y*scale<2.0 ? vec4(col,1.0) : fragColor;
+    fragColor = texCoord.x*scale<2.0&&texCoord.y*scale<2.0 ? vec4(col,0.8) : fragColor;
 
 
 

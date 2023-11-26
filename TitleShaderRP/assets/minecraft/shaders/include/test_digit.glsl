@@ -44,11 +44,11 @@ int convert_character(vec2 texCoord, int n) {
     float angle = (atan(nCoord.y,nCoord.x)/acos(-1.0)+1.0)/2.0;
     float split = 50.0;
     // float v = float(iTime*1000.0)/float(2<<24-1)*(split+1.0);
-    float v = float(textColorDigit*1000)/float(2<<24-1)*(split+1.0);
+    float v = float(textColorDigit)/float(2<<24-1)*(split+1.0);
     bool alpha = length(nCoord)*split<angle+floor(v-1.0);
     alpha = alpha|| length(nCoord)*split<angle+floor(v) && angle<fract(v);
 
-    fragColor = alpha ? vec4(0.0) : vec4(vec3(0.0),1.0);
+    fragColor = alpha ? vec4(0.0) : vec4(vec3(0.0),0.8);
     
 
     //文字表示設定

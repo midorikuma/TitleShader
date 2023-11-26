@@ -54,7 +54,7 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
     //色設定(円形)
     float alpha = float(vertexColor.b*sqrt(2.0)<length(nCoord));
 
-    fragColor = vec4(color,alpha/1.0);
+    fragColor = vec4(color,alpha*0.8);
     
     
     //文字表示設定
