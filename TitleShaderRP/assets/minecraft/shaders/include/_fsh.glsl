@@ -1,8 +1,5 @@
 #undef main
 
-ivec3 textColorRGB = ivec3(vertexColor.rgb*255.0);
-int textColorDigit = (textColorRGB.r<<16) + (textColorRGB.g<<8) + textColorRGB.b;
-
 in float flag;
 in vec2 fragCoord;
 
@@ -16,34 +13,27 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 // in vec4  iDate;                 // (year, month, day, time in seconds)
 // in float iSampleRate;           // sound sample rate (i.e., 44100)
 
+#define _fsh
+
 // Add .glsl sources here
-#define FILE test_rgb
-#moj_import <test_rgb.glsl>
-#define FILE test_hsv
-#moj_import <test_hsv.glsl>
-#define FILE test_digit
-#moj_import <test_digit.glsl>
-// #define FILE file_name
-// #moj_import
+#undef mainImage
+#define mainImage debug
+#moj_import <debug.glsl>
+#undef mainImage
+#define mainImage test
+#moj_import <test.glsl>
 
 
 void main() {
     switch(int(flag)){
         default: defaultmain();
         break;
-        #moj_import <_cton.glsl>
-
+        
         // Add cases here
-        case 0: fragColor = vec4(vertexColor.rgb,0.8);
-        break;
-        case 1: test_rgb();
-        break;
-        case 2: test_hsv();
-        break;
-        case 3: test_digit();
-        break;
-        // case A: file_name();
-        // break;
+        case 0: debug
+        (fragColor,fragCoord);break;
+        case 1: test
+        (fragColor,fragCoord);break;
         
 
     }

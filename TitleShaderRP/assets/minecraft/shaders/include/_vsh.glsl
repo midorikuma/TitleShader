@@ -1,12 +1,5 @@
 #undef main
 
-const ivec4 vposx = ivec4(-1, -1, 1, 1);
-const ivec4 vposy = ivec4(1, -1, -1, 1);
-
-uniform sampler2D Sampler0;
-uniform vec2 ScreenSize;
-uniform float GameTime;
-
 out float flag;
 out vec2 fragCoord;
 
@@ -19,6 +12,13 @@ out float iTime;                 // shader playback time (in seconds)
 out vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down), zw: click
 // out vec4  iDate;                 // (year, month, day, time in seconds)
 // out float iSampleRate;           // sound sample rate (i.e., 44100)
+
+uniform sampler2D Sampler0;
+uniform vec2 ScreenSize;
+uniform float GameTime;
+
+const ivec4 vposx = ivec4(-1, -1, 1, 1);
+const ivec4 vposy = ivec4(1, -1, -1, 1);
 
 // Setting of shader display
 const vec2 Shift = vec2(0.0,0.0);
@@ -44,6 +44,9 @@ void main() {
         fragCoord = (offset+1.0)/2.0*ScreenSize;
 
         iResolution = vec3(ScreenSize,0.0);
-        iTime = GameTime*24000.0/20.0;
+        iTime = mod(GameTime*24000.0,240.0)-vertexColor.z*255.0;
+        iTime += float(iTime<-1.0)*240.0;
+        iTime = clamp(iTime/20.0,0.0,12.0);
+        iMouse = vertexColor.xyxy*ScreenSize.xyxy;
     }
 }

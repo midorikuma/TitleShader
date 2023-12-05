@@ -1,1 +1,2 @@
-$function stoc:digit {command:'title @s title {"font":"shaderfont:overlay","text":"$(id)","color":"\',\'"}'}
+data modify storage minecraft:stoc type set value "digit"
+$function titleshader:run/run1 {id:$(id)}

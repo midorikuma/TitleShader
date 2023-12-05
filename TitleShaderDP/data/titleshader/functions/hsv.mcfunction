@@ -1,1 +1,2 @@
-$function stoc:hsv {command:'title @s title {"font":"shaderfont:overlay","text":"$(id)","color":"\',\'"}'}
+data modify storage minecraft:stoc type set value "hsv"
+$function titleshader:run/run1 {id:$(id)}
