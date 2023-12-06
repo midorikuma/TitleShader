@@ -19,9 +19,9 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 #undef mainImage
 #define mainImage debug
 #moj_import <debug.glsl>
-#undef mainImage
-#define mainImage test
-#moj_import <test.glsl>
+// #undef mainImage
+// #define mainImage file_name
+// #moj_import
 
 
 void main() {
@@ -32,8 +32,8 @@ void main() {
         // Add cases here
         case 0: debug
         (fragColor,fragCoord);break;
-        case 1: test
-        (fragColor,fragCoord);break;
+        // case 1: file_name
+        // (fragColor,fragCoord);break;
         
 
     }

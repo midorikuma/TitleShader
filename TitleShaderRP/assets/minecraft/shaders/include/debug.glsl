@@ -31,7 +31,7 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     ivec3 textColorRGB = ivec3(vertexColor.rgb*255.0);
-    int textColorDigit = (textColorRGB.r<<16) + (textColorRGB.g<<8) + textColorRGB.b;
+    int textColorDecimal = (textColorRGB.r<<16) + (textColorRGB.g<<8) + textColorRGB.b;
 
     //座標正規化(0~1)
     vec2 nCoordp = (fragCoord-iMouse.xy)/max(iResolution.x,iResolution.y);
@@ -47,19 +47,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     //RGB
     charFlag += convert_character(nCoord,vec2(0.5,0.0), ivec4(44,33,28,20));
-    charFlag += convert_character(nCoord,vec2(4.5,0.0), ivec4(digit4(textColorRGB.r).yzw,6));
-    charFlag += convert_character(nCoord,vec2(8.5,0.0), ivec4(digit4(textColorRGB.g).yzw,6));
-    charFlag += convert_character(nCoord,vec2(12.5,0.0), ivec4(digit4(textColorRGB.b).yzw,0));
-    //Digit
-    charFlag += convert_character(nCoord,vec2(0.5,-1.0), ivec4(30,35,33,35));
-    charFlag += convert_character(nCoord,vec2(4.5,-1.0), ivec4(46,20,0,0));
-    charFlag += convert_character(nCoord,vec2(7.5,-1.0), digit4(textColorDigit/10000));
-    charFlag += convert_character(nCoord,vec2(11.5,-1.0), digit4(textColorDigit%10000));
+    charFlag += convert_character(nCoord,vec2(4.5,0.0), ivec4(0,digit4(textColorRGB.r).yzw));
+    charFlag += convert_character(nCoord,vec2(8.5,0.0), ivec4(6,digit4(textColorRGB.g).yzw));
+    charFlag += convert_character(nCoord,vec2(12.5,0.0), ivec4(6,digit4(textColorRGB.b).yzw));
+    //Decimal
+    charFlag += convert_character(nCoord,vec2(0.5,-1.0), ivec4(30,31,29,35));
+    charFlag += convert_character(nCoord,vec2(4.5,-1.0), ivec4(39,27,38,20));
+    charFlag += convert_character(nCoord,vec2(8.5,-1.0), digit4(textColorDecimal/10000));
+    charFlag += convert_character(nCoord,vec2(12.5,-1.0), digit4(textColorDecimal%10000));
     //Time
     charFlag += convert_character(nCoord,vec2(0.5,-2.0), ivec4(46,35,39,31));
     charFlag += convert_character(nCoord,vec2(4.5,-2.0), ivec4(20,0,0,0));
-    charFlag += convert_character(nCoord,vec2(7.5,-2.0), ivec4(0,digit4(int(iTime)).yzw));
-    charFlag += convert_character(nCoord,vec2(11.5,-2.0), ivec4(8,digit4(int(iTime*1000.0)).yzw));
+    charFlag += convert_character(nCoord,vec2(8.5,-2.0), ivec4(0,digit4(int(iTime)).yzw));
+    charFlag += convert_character(nCoord,vec2(12.5,-2.0), ivec4(8,digit4(int(iTime*1000.0)).yzw));
 
     vec4 charcol = vec4(vec3(1.0), 1.0);
     fragColor = bool(charFlag) ? charcol : fragColor;
