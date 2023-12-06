@@ -1,21 +1,14 @@
 [日本語](https://github.com/midorikuma/TitleShader/blob/main/README-ja.md) | English
 # TitleShader
-A ResourcePack Shader that can call and display shaders from the title command.
+TitleShader is a ResourcePack Shader for Minecraft that allows you to display Shadertoy shaders using the title command.
 
-Use the title command on the Minecraft to display the shaders for Shadertoy written in the glsl file.
+# How to Use
+## Setup
+First, install the `TitleShaderRP` resource pack.
 
-# Setup
-Apply the following resource pack
+Then, apply two data packs: `TitleShaderDP` and `ScoreToColorDP` (available at [this link](https://github.com/midorikuma/DP_Libraries)).
 
-* TitleShaderRP
-
-Apply the following two data packs
-
-* TitleShaderDP
-* ScoreToColorDP
-＞[https://github.com/midorikuma/DP_Libraries]
-
-Enter the world to which the data pack has been applied and execute the following command.
+After entering the world with these data packs, run the following setup commands:
 ```
 /function stoc:setup
 /scoreboard players set @s TextColorR 0
@@ -23,67 +16,43 @@ Enter the world to which the data pack has been applied and execute the followin
 /scoreboard players set @s TextColorB 0
 ```
 
-# Execution
-The following commands can be used to display shaders to the player
+
+## Displaying Shaders
+To display the shader, use the following command:
 ```
 /function titleshader:rgb {id:0}
 ```
-id can be a number between 0 and 127. 0 is set to debug shaders by default.
+The `id` parameter should be a number between 0 and 127, with 0 set for debug shaders by default.
 
-# Add shaders
-To add the new shaders, put the glsl file describing the shaders into the TitleShaderRP\assets\minecraft\shaders\include folder
+## Adding New Shaders
+To add new shaders, place the GLSL shader files in the `TitleShaderRP\assets\minecraft\shaders\include` folder and then:
+1. Edit `_fsh.glsl` in the same folder to link your shader's id.
+2. Uncomment lines 22-24 and replace `"file_name"` on line 23 with your shader file name.
+3. Add `<"file_name".glsl>` on line 24.
+4. Uncomment lines 35 and 36 and repeat the `"file_name"` replacement.
+5. The id value before `"file_name"` links the id to your shader.
 
-Next, from _fsh.glsl in the same include folder, link the id of the command to the shader you have added.
-***
-Once you open the file,
-
-Uncomment lines 22-24,
-
-Change "file_name" in line 23 to the name of the glsl file,
-
-Add <"file_name".glsl> on line 24.
-***
-Finally,
-
-Uncomment lines 35 and 36,
-
-Change "file_name" to the name of the glsl file as before
-
-where the value written just before "file_name" is the value of the id
+Example command to link an id to a shader:
 ```
 /function titleshader:rgb {id:1}
 ```
-You have now tied the id to the shader you added.
 
-# Linking Scores and Shaders
-When the titleshader:rgb function is executed,
+## Linking Scores and Shaders
+When executing `titleshader:rgb`, the shader reads values from the `TextColorR`, `TextColorG`, and `TextColorB` scores of the player executing the command. These scores can range from 0-255 for each RGB component.
 
-the score TextColorR, TextColorG and TextColorB values are read by the shader
+Additional Commands:
+- `titleshader:hsv` for HSV color settings (H:0-360, S:0-255, V:0-255).
+- `titleshader:decimal` for Decimal color values (Decimal:0-16777215).
 
-(The score that the player executing the command has is reflected)
+Shader scores are normalized to the range 0.0-1.0 and used in `vertexColor.rgb`.
 
-Scores can be set in the range of 0-255 for each RGB.
-***
-In addition, by executing titleshader:hsv,
+When the `iMouse` and `iTime` variables commonly used in Shadertoy are called in the shader,
 
-colors can be set in HSV from TextColorH, TextColorS, and TextColorV values (H:0-360, S:0-255, V:0-255)
+the values are reflected as follows:
+- `vertexColor.xy` represents `iMouse`.
+- `vertexColor.z` represents `iTime`.
 
-In addition, by executing titleshader:digit,
-
-colors can be set in decimal number from TextColorDigit  value (Digit:0-16777215).
-***
-On the shader side, the score is read as a color and the value is reflected in vertexColor.rgb in the normalized range 0.0-1.0
-
-Also, when the iMouse and iTime variables commonly used in Shadertoy are called in the shader,
-
-the values are reflected as follows
-
-* vertexColor.xy -> iMouse
-* vertexColor.z -> iTime
-
-When using the titleshader:time function,
-
-iTime can be used as "seconds counted as 0.0 when the command is executed".
+To use `iTime` as seconds counted from command execution, use:
 ```
 /function titleshader:time {id:0}
 ```
