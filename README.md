@@ -52,7 +52,7 @@ the values are reflected as follows:
 - `vertexColor.xy` represents `iMouse`.
 - `vertexColor.z` represents `iTime`.
 
-To use `iTime` as seconds counted from command execution, use:
+To use `iTime` as the number of seconds since the command was executed, executing titleshader:time.
 ```
 /function titleshader:time {id:0}
 ```
