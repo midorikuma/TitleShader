@@ -68,9 +68,9 @@ titleshader:rgbファンクションを実行時には
 
 TextColorH, TextColorS, TextColorVの値からHSVで色を(H:0-360,S:0-255,V:0-255)
 
-titleshader:digitを実行することで
+titleshader:decimalを実行することで
 
-TextColorDigitにて十進数から色を設定可能です(Digit:0-16777215)
+TextColorDecimalにて十進数から色を設定可能です(Decimal:0-16777215)
 ***
 シェーダー側ではスコアが色として読み込まれ
 
