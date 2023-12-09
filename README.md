@@ -41,8 +41,8 @@ Example command to link an id to a shader:
 When executing `titleshader:rgb`, the shader reads values from the `TextColorR`, `TextColorG`, and `TextColorB` scores of the player executing the command. These scores can range from 0-255 for each RGB component.
 
 Additional Commands:
-- `titleshader:hsv` for HSV color settings (H:0-360, S:0-255, V:0-255).
-- `titleshader:decimal` for Decimal color values (Decimal:0-16777215).
+- `titleshader:hsv` for HSV color values from the `TextColorH`, `TextColorS`, and `TextColorV` scores (H:0-360, S:0-255, V:0-255).
+- `titleshader:decimal` for Decimal color value from the `TextColorDecimal` score (Decimal:0-16777215).
 
 Shader scores are normalized to the range 0.0-1.0 and used in `vertexColor.rgb`.
 
@@ -52,7 +52,7 @@ the values are reflected as follows:
 - `vertexColor.xy` represents `iMouse`.
 - `vertexColor.z` represents `iTime`.
 
-To use `iTime` as seconds counted from command execution, use:
+To use `iTime` as the number of seconds since the command was executed, executing titleshader:time.
 ```
 /function titleshader:time {id:0}
 ```
