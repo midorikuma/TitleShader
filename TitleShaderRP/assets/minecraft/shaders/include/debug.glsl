@@ -1,4 +1,4 @@
-#ifndef _fsh
+#ifndef fsh
 const vec4 vertexColor = vec4(vec3(0,128,0)/255.0 ,1.0);
 #endif
 
@@ -28,7 +28,7 @@ int convert_character(vec2 texCoord, vec2 offset, ivec4 ns) {
 }
 
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(in vec2 fragCoord, out vec4 fragColor)
 {
     ivec3 textColorRGB = ivec3(vertexColor.rgb*255.0);
     int textColorDecimal = (textColorRGB.r<<16) + (textColorRGB.g<<8) + textColorRGB.b;

@@ -20,10 +20,7 @@ uniform float GameTime;
 const ivec4 vposx = ivec4(-1, -1, 1, 1);
 const ivec4 vposy = ivec4(1, -1, -1, 1);
 
-// Setting of shader display
-const vec2 Shift = vec2(0.0,0.0);
-const float Depth = -1.0;
-const float Scale = 1.0;
+#moj_import <main/_setting.glsl>
 
 void main() {
     defaultmain();
@@ -37,7 +34,7 @@ void main() {
 
         vertexColor = Color;
         gl_Position = vec4(offset+Shift, Depth/Scale, 1.0/Scale);
-        gl_Position *= float(Position.z!=0.0);
+        gl_Position *= float(Position.z!=2400.0);
 
         iCoord.y += 1;
         flag = texelFetch(Sampler0, iCoord, 0).r*255.0;

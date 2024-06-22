@@ -13,7 +13,8 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 // in vec4  iDate;                 // (year, month, day, time in seconds)
 // in float iSampleRate;           // sound sample rate (i.e., 44100)
 
-#define _fsh
+#define fsh
+#define shader(case_number, func) case case_number: func(fragCoord, fragColor); break;
 
 // Add .glsl sources here
 #undef mainImage
@@ -21,7 +22,7 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 #moj_import <debug.glsl>
 // #undef mainImage
 // #define mainImage file_name
-// #moj_import
+// #moj_import //<file_name.glsl>
 
 
 void main() {
@@ -29,12 +30,9 @@ void main() {
         default: defaultmain();
         break;
         
-        // Add cases here
-        case 0: debug
-        (fragColor,fragCoord);break;
-        // case 1: file_name
-        // (fragColor,fragCoord);break;
+        // Add shaders here
+        shader(0, debug)
+        // shader(1, file_name)
         
-
     }
 }
