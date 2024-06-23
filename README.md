@@ -27,9 +27,9 @@ The `id` parameter should be a number between 0 and 127, with 0 set for debug sh
 ## Adding New Shaders
 To add new shaders, place the GLSL shader files in the `TitleShaderRP\assets\minecraft\shaders\include` folder and then:
 1. Edit `_fsh.glsl` in the same folder.
-2. Uncomment lines 22-24 and replace `"file_name"` on line 23 with your shader file name.
-3. Add `<"file_name".glsl>` on line 24.
-4. Uncomment lines 35 and 36 and repeat the `"file_name"` replacement.
+2. Uncomment lines 23-25 and replace `"file_name"` on line 23 with your shader file name.
+3. Add `<"file_name".glsl>` on line 25.
+4. Uncomment line 35 and replace `"file_name"` as well.
 5. The id value before `"file_name"` links the id to your shader.
 
 Example command to link an id 1 to a shader:
