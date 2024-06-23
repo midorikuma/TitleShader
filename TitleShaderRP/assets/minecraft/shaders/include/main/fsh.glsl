@@ -14,7 +14,7 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 // in float iSampleRate;           // sound sample rate (i.e., 44100)
 
 #define fsh
-#define shader(case_number, func) case case_number: func(fragCoord, fragColor); break;
+#define shader(case_number, func) case case_number: func(fragColor, fragCoord); break;
 
 // Add .glsl sources here
 #undef mainImage
