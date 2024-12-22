@@ -1,0 +1,1 @@
+execute as @s at @s as @e[distance=..0,type=creeper] anchored eyes positioned ^ ^ ^ as @p run function stoc:rgb {command:'postshader:run/run3'}

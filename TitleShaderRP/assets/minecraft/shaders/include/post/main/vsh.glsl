@@ -1,7 +1,9 @@
 #undef main
 
-out float flag;
+flat out int flag;
+flat out int type;
 out vec2 fragCoord;
+out vec4 vertexColor;
 
 out vec3  iResolution;           // viewport resolution (in pixels)
 out float iTime;                 // shader playback time (in seconds)
@@ -13,37 +15,41 @@ out vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down
 // out vec4  iDate;                 // (year, month, day, time in seconds)
 // out float iSampleRate;           // sound sample rate (i.e., 44100)
 
-uniform sampler2D Sampler0;
 uniform vec2 ScreenSize;
 uniform float GameTime;
 
 const ivec4 vposx = ivec4(-1, -1, 1, 1);
 const ivec4 vposy = ivec4(1, -1, -1, 1);
 
-#moj_import <main/_setting.glsl>
+#moj_import <post/main/_setting.glsl>
+ivec3 getVal(in int x){
+    return ivec3(texelFetch(DataSampler, ivec2(x-1,0), 0).rgb*255.0);
+}
 
 void main() {
     defaultmain();
 
-    flag = -2.0;
-    ivec2 iCoord = ivec2(texCoord0 * textureSize(Sampler0,0));
-    iCoord.y -= int(1<(gl_VertexID+1) % 4);
-    if(texelFetch(Sampler0, iCoord, 0)==vec4(12,34,56,78)/255.0){
+    flag = -1;
+    type = -1;
+    if(getVal(1) == ivec3(12,34,56)){
         int glVID = gl_VertexID % 4;
         vec2 offset = vec2(vposx[glVID],vposy[glVID]);
 
-        vertexColor = Color;
+        vertexColor = texelFetch(DataSampler, ivec2(2,0), 0);
         gl_Position = vec4(offset+Shift, Depth/Scale, 1.0/Scale);
-        gl_Position *= float(Position.z!=2400.0);
+        gl_Position.z = -1.0;
+        // gl_Position *= float(mod(Position.z,1.0)!=0.0);
 
-        iCoord.y += 1;
-        flag = texelFetch(Sampler0, iCoord, 0).r*255.0;
+        ivec3 col2 = getVal(2);
+        flag = col2.r;
+        type = col2.g;
         fragCoord = (offset+1.0)/2.0*ScreenSize;
 
         iResolution = vec3(ScreenSize,0.0);
-        iTime = mod(GameTime*24000.0,240.0)-vertexColor.z*255.0;
-        iTime += float(iTime<-1.0)*240.0;
-        iTime = clamp(iTime/20.0,0.0,12.0);
+        ivec3 col4 = getVal(4);
+        int tick = ((col4.r<<8)*200)+(col4.g*200)+col4.b;
+        tick -= col2.b;
+        iTime = float(tick)/200.;
         iMouse = vertexColor.xyxy*ScreenSize.xyxy;
     }
 }

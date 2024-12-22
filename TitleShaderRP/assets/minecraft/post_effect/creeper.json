@@ -1,0 +1,59 @@
+{
+    "targets" : {
+        "final": {},
+        "swap": {},
+        "swap2": {},
+        "data": {"width": 3840, "height": 2160},
+        "data_swap": {"width": 3840, "height": 2160}
+    },
+    "passes": [
+        {
+            "program": "minecraft:post/internal/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main"
+                }
+            ],
+            "output": "final"
+        },
+        {
+            "program": "minecraft:post/internal/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "data"
+                }
+            ],
+            "output": "data_swap"
+        },
+        {
+            "program": "minecraft:post/data",
+            "inputs": [
+                {
+                    "sampler_name": "Main",
+                    "target": "final"
+                },
+                {
+                    "sampler_name": "Data",
+                    "target": "data_swap"
+                }
+            ],
+            "output": "data"
+        },
+        {
+            "program": "minecraft:post/shader",
+            "inputs": [
+                {
+                    "sampler_name": "Main",
+                    "target": "final"
+                },
+                {
+                    "sampler_name": "Data",
+                    "target": "data"
+                }
+            ],
+            "output": "minecraft:main"
+        }
+    ]
+}

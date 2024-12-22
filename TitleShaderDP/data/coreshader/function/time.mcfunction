@@ -7,6 +7,6 @@ scoreboard players operation @s TextColorB %= ###240 TextColor
 
 ## 実行
 data modify storage minecraft:stoc type set value "rgb"
-$function titleshader:run/run1 {id:$(id)}
+$function coreshader:run/run1 {id:$(id)}
 
 scoreboard players operation @s TextColorB = @s TextColor

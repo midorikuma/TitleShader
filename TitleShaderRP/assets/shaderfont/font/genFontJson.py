@@ -1,3 +1,6 @@
+#タイプ
+type="core"
+
 # charsリストを生成する
 chars_list = []
 for i in range(0x000, 0x80, 0x10):
@@ -10,7 +13,7 @@ json_template = """
     "providers": [
         {{
             "type": "bitmap",
-            "file": "shaderfont:character.png",
+            "file": "shaderfont:"""+type+"""char.png",
             "height": 0,
             "ascent": 0,
             "chars": [
@@ -26,6 +29,6 @@ formatted_chars = ",\n                ".join(f'"{char}"' for char in chars_list)
 json_string = json_template.format(chars=formatted_chars)
 
 # JSONデータをファイルに保存する
-file_path = "overlay.json"
+file_path = type+"font.json"
 with open(file_path, "w", encoding="utf-8") as file:
     file.write(json_string)

@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <fog.glsl>
+#moj_import <minecraft:fog.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -23,4 +23,4 @@ void main() {
     }
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
 }
-#moj_import <main/fsh.glsl>
+#moj_import <core/main/fsh.glsl>

@@ -3,7 +3,7 @@
     "providers": [
         {
             "type": "bitmap",
-            "file": "shaderfont:character.png",
+            "file": "shaderfont:corechar.png",
             "height": 0,
             "ascent": 0,
             "chars": [

@@ -1,0 +1,11 @@
+{
+    "vertex": "minecraft:post/internal/blit",
+    "fragment": "minecraft:post/data",
+    "samplers": [
+        { "name": "MainSampler" },
+        { "name": "DataSampler" }
+    ],
+    "uniforms": [
+        { "name": "GameTime", "type": "float", "count": 1, "values": [ 0.0 ] }
+    ]
+}

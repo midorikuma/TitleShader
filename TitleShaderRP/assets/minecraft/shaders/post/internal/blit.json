@@ -1,0 +1,9 @@
+{
+    "vertex": "minecraft:post/internal/blit",
+    "fragment": "minecraft:post/internal/blit",
+    "samplers": [
+        { "name": "InSampler" }
+    ],
+    "uniforms": [
+    ]
+}

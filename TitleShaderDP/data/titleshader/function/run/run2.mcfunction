@@ -1,1 +1,0 @@
-$function stoc:$(type) {command:'title @s title {"font":"shaderfont:overlay","text":"\\\\uE0$(id0)$(id1)","color":"\',\'"}'}

@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <fog.glsl>
+#moj_import <minecraft:fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -25,4 +25,4 @@ void main() {
     vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
     texCoord0 = UV0;
 }
-#moj_import <main/vsh.glsl>
+#moj_import <core/main/vsh.glsl>
