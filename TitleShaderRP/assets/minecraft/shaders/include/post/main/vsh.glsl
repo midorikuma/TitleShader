@@ -22,16 +22,13 @@ const ivec4 vposx = ivec4(-1, -1, 1, 1);
 const ivec4 vposy = ivec4(1, -1, -1, 1);
 
 #moj_import <post/main/_setting.glsl>
-ivec3 getVal(in int x){
-    return ivec3(texelFetch(DataSampler, ivec2(x-1,0), 0).rgb*255.0);
-}
 
 void main() {
     defaultmain();
 
     flag = -1;
     type = -1;
-    if(getVal(1) == ivec3(12,34,56)){
+    if(texelFetch(DataSampler, ivec2(0), 0).rgb == vec3(12.,34.,56.)/255.0){
         int glVID = gl_VertexID % 4;
         vec2 offset = vec2(vposx[glVID],vposy[glVID]);
 
@@ -40,16 +37,15 @@ void main() {
         gl_Position.z = -1.0;
         // gl_Position *= float(mod(Position.z,1.0)!=0.0);
 
-        ivec3 col2 = getVal(2);
-        flag = col2.r;
-        type = col2.g;
+        ivec4 texcol = ivec4(texelFetch(DataSampler, ivec2(1,0), 0)*255.1);
+        flag = texcol.r;
+        type = texcol.g;
         fragCoord = (offset+1.0)/2.0*ScreenSize;
 
         iResolution = vec3(ScreenSize,0.0);
-        ivec3 col4 = getVal(4);
-        int tick = ((col4.r<<8)*200)+(col4.g*200)+col4.b;
-        tick -= col2.b;
-        iTime = float(tick)/200.;
+        iTime = mod(GameTime*24000.0,240.0)-vertexColor.z*255.0;
+        iTime += float(iTime<-1.0)*240.0;
+        iTime = clamp(iTime/20.0,0.0,12.0);
         iMouse = vertexColor.xyxy*ScreenSize.xyxy;
     }
 }

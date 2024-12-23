@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "ctrl": {
+      "conditions": {
+        "player": [
+          {
+            "condition":"entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "input": {
+                  "sprint":true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "function": "ktos:key/ctrl"
+  }
+}

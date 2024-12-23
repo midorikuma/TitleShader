@@ -4,6 +4,7 @@ uniform sampler2D MainSampler;
 uniform sampler2D DataSampler;
 
 in vec2 texCoord;
+in vec4 vertexColor;
 
 out vec4 fragColor;
 vec4 mainColor;

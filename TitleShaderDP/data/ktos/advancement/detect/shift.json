@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "shift": {
+      "conditions": {
+        "player": [
+          {
+            "condition":"entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "input": {
+                  "sneak":true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "function": "ktos:key/shift"
+  }
+}

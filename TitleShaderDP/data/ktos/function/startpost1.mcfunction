@@ -1,0 +1,1 @@
+$summon creeper ~ ~ ~ {Tags:["post"],NoAI:true,NoGravity:true,Silent:true,DeathLootTable:"empty",attributes:[{id:"scale",base:1.147}],active_effects:[{id:"invisibility",duration:2147483647,show_particles:false}],Invulnerable:true,Rotation:$(Rotation)}

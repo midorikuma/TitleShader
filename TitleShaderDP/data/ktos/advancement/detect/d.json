@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "d": {
+      "conditions": {
+        "player": [
+          {
+            "condition":"entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "input": {
+                  "right":true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "function": "ktos:key/d"
+  }
+}

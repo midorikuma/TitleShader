@@ -21,9 +21,6 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 #undef mainImage
 #define mainImage debug
 #moj_import <core/debug.glsl>
-#undef mainImage
-#define mainImage test
-#moj_import <core/test.glsl>
 // #undef mainImage
 // #define mainImage file_name
 // #moj_import //<core/file_name.glsl>
@@ -38,7 +35,6 @@ void main() {
             
             // Add shaders here
             shader(0, debug)
-            shader(1, test)
             // shader(n, file_name)
         }
 

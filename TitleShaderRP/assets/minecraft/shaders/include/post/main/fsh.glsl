@@ -3,7 +3,6 @@
 flat in int flag;
 flat in int type;
 in vec2 fragCoord;
-in vec4 vertexColor;
 
 in vec3  iResolution;           // viewport resolution (in pixels)
 in float iTime;                 // shader playback time (in seconds)
@@ -22,9 +21,6 @@ in vec4  iMouse;                // mouse pixel coords. xy: current (if MLB down)
 #undef mainImage
 #define mainImage debug
 #moj_import <post/debug.glsl>
-#undef mainImage
-#define mainImage test
-#moj_import <post/test.glsl>
 // #undef mainImage
 // #define mainImage file_name
 // #moj_import //<post/file_name.glsl>
@@ -38,7 +34,6 @@ void main() {
         
         // Add shaders here
         shader(0, debug)
-        shader(1, test)
         // shader(n, file_name)
     }
 }

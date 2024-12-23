@@ -1,0 +1,1 @@
+execute as @a[tag=prepostviewer] at @s run function ktos:startpost3
